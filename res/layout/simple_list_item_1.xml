@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/score"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:padding="5dip"
+		android:textSize="12dip"
+		android:scrollbars="vertical"
+		android:fadingEdge="vertical"
+		android:layout_alignParentRight="true"
+		android:gravity="bottom"
+		android:textStyle="bold"
+	/>
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/author"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_below="@+id/title"
+		android:textSize="12dip"
+		android:paddingLeft="10dip"
+		android:layout_alignBaseline="@+id/score"
+		android:textStyle="italic"
+	/>
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/title"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:padding="10dip"
+    	android:scrollbars="vertical"
+		android:fadingEdge="vertical"
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:paddingLeft="6dip"
+    	android:minHeight="30dip"
+    	android:textSize="15dip"
+    	android:layout_alignParentLeft="@+id/score"
+    	android:textColor="#F5DEB3"
+    	android:autoLink="web"
+	/>
+	
+</RelativeLayout>
