@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import edu.asu.tltjr.healthnews.R;
 
 public class StoryAdapter extends ArrayAdapter<Story> {
+	Context context;
 	int resource;
 	
 	public StoryAdapter(Context _context, int _resource, List<Story> _items) {
 		super(_context, _resource, _items);
+		context = _context;
 		resource = _resource;
 	}
 	
@@ -34,11 +35,12 @@ public class StoryAdapter extends ArrayAdapter<Story> {
 		} else {
 			storiesView = (LinearLayout) convertView;
 		}
-		
+
 		TextView titleView = (TextView)storiesView.findViewById(R.id.title);
 		TextView siteView = (TextView)storiesView.findViewById(R.id.score);
 		titleView.setText(title);
 		siteView.setText(site);
 		return storiesView;
 	}
+
 }

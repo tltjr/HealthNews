@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +23,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -50,13 +54,9 @@ public class Main extends Activity {
 	static int DEFAULT_ACTION_PREFERENCES = 0;
 	
 	String loginUrl;
-	
 	ProgressDialog dialog;
-	
 	ListView newsListView;
-	
 	StoryAdapter storyAdapter;
-	
 	ArrayList<Story> stories = new ArrayList<Story>();
 	
     /** Called when the activity is first created. */
@@ -68,6 +68,7 @@ public class Main extends Activity {
     	newsListView = (ListView)this.findViewById(R.id.hnListView);
     	registerForContextMenu(newsListView);
     	int layoutID = R.layout.simple_list_item_1;
+
     	storyAdapter = new StoryAdapter(this, layoutID , stories);
     	newsListView.setAdapter(storyAdapter);
     	newsListView.setOnItemClickListener(clickListener);
@@ -107,38 +108,16 @@ public class Main extends Activity {
     		}
     	}
     };
-    
+
     OnItemClickListener clickListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> newsAV, View view, int pos, long id) {
 			final Story item = (Story) newsAV.getAdapter().getItem(pos);
-			if (pos < 30) {
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-				String ListPreference = prefs.getString("PREF_DEFAULT_ACTION", "view-comments");
-				if (ListPreference.equalsIgnoreCase("open-in-browser")) {
-					Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse((String) item.getUrl()));
-					startActivity(viewIntent);
-				} 
-//				else if (ListPreference.equalsIgnoreCase("view-comments")) {
-//					Intent intent = new Intent(Main.this, Comments.class);
-//					intent.putExtra("url", item.getCommentsUrl());
-//					intent.putExtra("title", item.getTitle());
-//					startActivity(intent); } 
-				else if (ListPreference.equalsIgnoreCase("mobile-adapted-view")) {
-					Intent viewIntent = new Intent("android.intent.action.VIEW",
-							Uri.parse((String) "http://www.google.com/gwt/x?u=" + item.getUrl()));
-					startActivity(viewIntent);
-				}
-			} else {
-				dialog = ProgressDialog.show(Main.this, "", "Loading. Please wait...", true);
-    	    	new Thread(new Runnable(){
-    	    		public void run() {
-    	    			refreshNews();
-    	    			dialog.dismiss();
-    	    			handler.sendEmptyMessage(NOTIFY_DATASET_CHANGED);
-    	    		}
-    	    	}).start();
-			}
+			//Bundle bundle = new Bundle();
+			//bundle.putString("url", item.getUrl());
+			Intent intent = new Intent(Main.this, StoryView.class);
+			intent.putExtra("url", item.getUrl());
+			startActivity(intent);
 		}
 	};
     
