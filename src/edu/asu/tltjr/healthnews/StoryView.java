@@ -10,7 +10,7 @@ public class StoryView extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
+        Bundle extras = this.getIntent().getExtras();
         String url = extras.getString("url");
         mWebView = new WebView(this);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -18,3 +18,18 @@ public class StoryView extends Activity {
         setContentView(mWebView);
     }
 }
+
+//public class StoryView extends Activity {
+//	WebView mWebView;
+//    /** Called when the activity is first created. */
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        Bundle bundle = this.getIntent().getExtras();
+//        String url = bundle.getString("url");
+//        mWebView = new WebView(this);
+//        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.loadUrl(url);
+//        setContentView(mWebView);
+//    }
+	

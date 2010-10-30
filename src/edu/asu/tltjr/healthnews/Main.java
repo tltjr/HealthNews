@@ -109,15 +109,30 @@ public class Main extends Activity {
     	}
     };
 
+//		final SpannableString s = new SpannableString(titleOne);
+//        Linkify.addLinks(s, Linkify.WEB_URLS);
+//        title = (TextView) findViewById(R.id.title);
+//        title.setText(s);
+//        title.setMovementMethod(LinkMovementMethod.getInstance());
+//        title.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Bundle bundle = new Bundle();
+//				bundle.putString("url", linkOne);
+//				Intent intent = new Intent(v.getContext(), StoryView.class);
+//				intent.putExtras(bundle);
+//				startActivityForResult(intent, 0);
+//			}
     OnItemClickListener clickListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> newsAV, View view, int pos, long id) {
 			final Story item = (Story) newsAV.getAdapter().getItem(pos);
-			//Bundle bundle = new Bundle();
-			//bundle.putString("url", item.getUrl());
-			Intent intent = new Intent(Main.this, StoryView.class);
-			intent.putExtra("url", item.getUrl());
-			startActivity(intent);
+			Bundle bundle = new Bundle();
+			bundle.putString("url", item.getUrl());
+			Intent intent = new Intent("edu.asu.tltjr.healthnews.StoryView");
+			intent.putExtras(bundle);
+			startActivityForResult(intent, 0);
 		}
 	};
     
