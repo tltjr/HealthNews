@@ -280,9 +280,8 @@ public class Main extends Activity {
     }
     
     private void refreshNews() {
-    	CnnNews cnnNews = new CnnNews(stories, getSharedPreferences(PREFS_NAME, 0));
-    	String cnnFeed = getString(R.string.cnnfeed);
-    	cnnNews.refreshNews(cnnFeed);
+    	StoryManager storyManager = new StoryManager(stories, getString(R.string.cnnfeed));
+    	storyManager.SetStories();
     }
     
 }

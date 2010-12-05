@@ -15,13 +15,11 @@ import net.htmlparser.jericho.Source;
 import android.content.SharedPreferences;
 
 public class CnnNews {
-	ArrayList<Story> stories;
-	SharedPreferences settings;
+	List<Story> stories;
 	Source source;
 	
-	public CnnNews(ArrayList<Story> stories, SharedPreferences settings) {
+	public CnnNews(List<Story> stories) {
 		this.stories = stories;
-		this.settings = settings;
 		registerTags();
 	}
 	
