@@ -3,7 +3,6 @@ package edu.asu.tltjr.healthnews;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.htmlparser.jericho.Element;
@@ -12,7 +11,6 @@ import net.htmlparser.jericho.MasonTagTypes;
 import net.htmlparser.jericho.MicrosoftTagTypes;
 import net.htmlparser.jericho.Segment;
 import net.htmlparser.jericho.Source;
-import android.content.SharedPreferences;
 
 public class CnnNews {
 	List<Story> stories;

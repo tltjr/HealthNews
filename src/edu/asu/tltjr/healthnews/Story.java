@@ -34,6 +34,6 @@ public class Story implements Comparable<Story> {
 
 	@Override
 	public int compareTo(Story another) {
-		return (int)(this.getScore() * 100) - (int)(((Story)another).getScore() * 100); 
+		return (int)(((Story)another).getScore() * 100) - (int)(this.getScore() * 100); 
 	}
 }

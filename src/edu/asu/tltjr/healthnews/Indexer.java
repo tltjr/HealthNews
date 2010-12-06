@@ -1,5 +1,6 @@
 package edu.asu.tltjr.healthnews;
 
+import java.io.File;
 import java.io.IOException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -13,20 +14,20 @@ import android.content.Context;
 
 public class Indexer {
 
-	private Context applicationContext;
+	private File filepath;
 	private IndexWriter indexWriter;
 	
-	public Indexer(Context applicationContext) {
-		this.applicationContext = applicationContext;
+	public Indexer(File filepath) {
+		this.filepath = filepath;
 	}
 
-	public void index(String url) {
+	public void index(String source) {
 		try {
-			Directory dir = FSDirectory.open(applicationContext.getFilesDir());
+			Directory dir = FSDirectory.open(filepath);
 			indexWriter = new IndexWriter(dir, new StandardAnalyzer(Version.LUCENE_30), 
-											true, IndexWriter.MaxFieldLength.UNLIMITED);
+											IndexWriter.MaxFieldLength.UNLIMITED);
 			Document doc = new Document();
-			doc.add(new Field("contents", url, Field.Store.YES, Field.Index.ANALYZED)); 
+			doc.add(new Field("contents", source, Field.Store.YES, Field.Index.ANALYZED)); 
 			indexWriter.addDocument(doc);
 			indexWriter.close();
 		} catch (IOException e) {
