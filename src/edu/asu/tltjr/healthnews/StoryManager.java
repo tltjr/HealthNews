@@ -29,6 +29,7 @@ public class StoryManager {
 		List<Parseable> allSites = new ArrayList<Parseable>();
 		allSites.add(new CnnNews(stories, "http://www.cnn.com/HEALTH/"));
 		allSites.add(new NytNews(stories, "http://www.nytimes.com/pages/health/"));
+		allSites.add(new YahooNews(stories, "http://news.yahoo.com/health/"));
 		for(Parseable site : allSites) {
 			stories = site.refreshNews();
 		}

@@ -25,7 +25,7 @@ public abstract class Parseable {
 		for(Element element : aElements) {
 			String url = getElementUrl(siteUrl, element.getStartTag().getAttributeValue("href"));
 			String title = element.getContent().toString();
-			if(!title.contains("img src")) {
+			if(!title.contains("img src") && !title.contains("Full&nbsp;Story") && !title.contains("&#")) {
 				Story temp = new Story(title, site, url);
 				stories.add(temp);
 			}
@@ -37,7 +37,7 @@ public abstract class Parseable {
 		source = convertSegmentsListToSource(segments);
 	}
 	
-	private Source convertSegmentsListToSource(List<? extends Segment> segments) {
+	protected Source convertSegmentsListToSource(List<? extends Segment> segments) {
 		String result = null;
 		for(Segment segment : segments){
 			result += segment.toString();
