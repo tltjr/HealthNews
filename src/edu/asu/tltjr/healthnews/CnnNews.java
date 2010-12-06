@@ -46,8 +46,11 @@ public class CnnNews {
 	private void elementsToListStory(List<Element> aElements) {
 		for(Element element : aElements) {
 			String url = getElementUrl(element.getStartTag().getAttributeValue("href"));
-			Story temp = new Story(element.getContent().toString(), "cnn.com", url);
-			stories.add(temp);
+			String title = element.getContent().toString();
+			if(!title.contains("img src")) {
+				Story temp = new Story(title, "cnn.com", url);
+				stories.add(temp);
+			}
 		}
 	}
 	

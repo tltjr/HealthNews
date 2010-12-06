@@ -38,8 +38,17 @@ public class StoryManager {
 	}
 
 	private void sort() {
+	//	parseImages();
 		scoreStories();
 		Collections.sort(stories);
+	}
+
+	private void parseImages() {
+		for(Story story : stories) {
+			if(story.title.contains("img src")) {
+				stories.remove(story);
+			}
+		}
 	}
 
 	private void scoreStories() {
