@@ -3,10 +3,8 @@ package edu.asu.tltjr.healthnews;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
@@ -14,41 +12,32 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 public class StoryManager {
 
 	private List<Story> stories;
-	private String cnnfeed;
 	private File file;
 	
-	public StoryManager(ArrayList<Story> stories, 
-			String cnnfeed, File file) {
+	public StoryManager(ArrayList<Story> stories, File file) {
 		this.stories = stories;
-		this.cnnfeed = cnnfeed;
 		this.file = file;
 	}
 
 	public void SetStories() {
-    	CnnNews cnnNews = new CnnNews(stories);
-    	stories = cnnNews.refreshNews(cnnfeed);
+		List<Parseable> allSites = new ArrayList<Parseable>();
+		allSites.add(new CnnNews(stories, "http://www.cnn.com/HEALTH/"));
+		//allSites.add(new NewYorkTimes(stories));
+		for(Parseable site : allSites) {
+			stories = site.refreshNews();
+		}
     	sort();
 	}
 
 	private void sort() {
-	//	parseImages();
 		scoreStories();
 		Collections.sort(stories);
-	}
-
-	private void parseImages() {
-		for(Story story : stories) {
-			if(story.title.contains("img src")) {
-				stories.remove(story);
-			}
-		}
 	}
 
 	private void scoreStories() {
