@@ -23,7 +23,7 @@ public class CnnNews {
 		registerTags();
 	}
 	
-	public void refreshNews(String cnnFeed) {
+	public List<Story> refreshNews(String cnnFeed) {
 		try {
 			source = new Source(new URL(cnnFeed));
 		} catch (MalformedURLException e) {
@@ -35,6 +35,7 @@ public class CnnNews {
 		getElementsByClass("cnn_bulletbin");
 		List<Element> a = source.getAllElements(HTMLElementName.A);
 		elementsToListStory(a);
+		return stories;
     }
 	
 	private String getElementUrl(String hrefAttributeValue) {

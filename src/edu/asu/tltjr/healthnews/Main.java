@@ -109,21 +109,6 @@ public class Main extends Activity {
     	}
     };
 
-//		final SpannableString s = new SpannableString(titleOne);
-//        Linkify.addLinks(s, Linkify.WEB_URLS);
-//        title = (TextView) findViewById(R.id.title);
-//        title.setText(s);
-//        title.setMovementMethod(LinkMovementMethod.getInstance());
-//        title.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Bundle bundle = new Bundle();
-//				bundle.putString("url", linkOne);
-//				Intent intent = new Intent(v.getContext(), StoryView.class);
-//				intent.putExtras(bundle);
-//				startActivityForResult(intent, 0);
-//			}
     OnItemClickListener clickListener = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> newsAV, View view, int pos, long id) {
@@ -280,7 +265,7 @@ public class Main extends Activity {
     }
     
     private void refreshNews() {
-    	StoryManager storyManager = new StoryManager(stories, getString(R.string.cnnfeed));
+    	StoryManager storyManager = new StoryManager(stories, getString(R.string.cnnfeed), getApplicationContext().getFilesDir());
     	storyManager.SetStories();
     }
     
